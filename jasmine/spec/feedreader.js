@@ -52,34 +52,45 @@ $(function() {
     });
 
 // test suite for the Menu
-describe('The menu', function(){
+    describe('The menu', function(){
 //test that the menu is hidden as default by searching for class of 'menu hidden' in the body tag.
-    it ('menu element is hidden by default', function(){
-        expect($('body').hasClass('menu-hidden')).toEqual(true);
+        it ('menu element is hidden by default', function(){
+            expect($('body').hasClass('menu-hidden')).toEqual(true);
+        });
     });
-});
-         /* TODO: Write a test that ensures the menu changes
+         /* test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
+          * has two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-    it ('menu changes visibility when menu icon clicked', function(){
-        //menu icon click shows menu
-        $('.menu-icon-link').trigger('click');
-        expect($('body').hasClass('menu-hidden')).toBe(false);
-        // second menu icon click hides menu
-        $('.menu-icon-link').trigger('click');
-        expect($('body').hasClass('menu-hidden')).toBe(true);
-    })
+        it ('menu changes visibility when menu icon clicked', function(){
+            //menu icon click shows menu
+             $('.menu-icon-link').trigger('click');
+             expect($('body').hasClass('menu-hidden')).toBe(false);
+            // second menu icon click hides menu
+             $('.menu-icon-link').trigger('click');
+             expect($('body').hasClass('menu-hidden')).toBe(true);
+        });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    //test suite for "Initial Entries"
+    describe('Initial Entries', function(){
 
-        /* TODO: Write a test that ensures when the loadFeed
+        //calls aynchronous function
+        beforeEach(function(done){
+            loadFeed(0, function () {
+                done();
+            });
+        });
+
+        /*test that ensures when the loadFeed
          * function is called and completes its work, there is at least
-         * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test will require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
+         * a single .entry element within the .feed container.*/
+        it ('loadFeed results in at least one entry element', function(){
+            expect($('.feed .entry').length).toBeGreaterThan(0);
+            });
+        });
+
+       
 
     /* TODO: Write a new test suite named "New Feed Selection" */
 
